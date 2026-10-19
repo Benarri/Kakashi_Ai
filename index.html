@@ -4,70 +4,291 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My C Chatbot AI</title>
+  <meta name="theme-color" content="#101827">
+  <title>Kakashi AI</title>
+
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: Arial, sans-serif;
-      max-width: 700px;
-      margin: 30px auto;
-      padding: 16px;
-      background: #f2f4f8;
+      margin: 0;
+      min-height: 100vh;
+      padding: 20px;
+      background: #101827;
+      color: #f1f5f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 720px;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 15px 45px #0005;
+    }
+
+    header {
+      padding: 22px;
+      text-align: center;
+      background: #172033;
+      border-bottom: 1px solid #334155;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      color: #38bdf8;
+    }
+
+    header p {
+      margin: 0;
+      color: #cbd5e1;
+    }
+
+    #status {
+      margin-top: 12px;
+      font-size: 13px;
+      color: #fbbf24;
     }
 
     #chat {
-      height: 350px;
+      height: 400px;
       overflow-y: auto;
-      background: white;
-      padding: 15px;
-      border-radius: 10px;
+      padding: 18px;
+      background: #0f172a;
+    }
+
+    .message {
+      max-width: 90%;
+      padding: 11px 14px;
+      border-radius: 12px;
       margin-bottom: 12px;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+      line-height: 1.5;
     }
 
-    input, button {
-      padding: 12px;
+    .user {
+      background: #075985;
+      margin-left: auto;
+      color: white;
+    }
+
+    .bot {
+      background: #263449;
+      margin-right: auto;
+      color: #e2e8f0;
+    }
+
+    .label {
+      display: block;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #7dd3fc;
+    }
+
+    .composer {
+      display: flex;
+      gap: 8px;
+      padding: 14px;
+      background: #1e293b;
+    }
+
+    #message {
+      flex: 1;
+      min-width: 0;
+      padding: 13px;
+      border: 1px solid #475569;
+      border-radius: 9px;
+      background: #0f172a;
+      color: white;
       font-size: 16px;
-      margin: 4px 0;
+      outline: none;
     }
 
-    input { width: 65%; }
-    button { cursor: pointer; }
-    .user { color: blue; }
-    .bot { color: darkgreen; }
+    #message:focus {
+      border-color: #38bdf8;
+    }
+
+    button {
+      padding: 12px 18px;
+      border: none;
+      border-radius: 9px;
+      background: #0284c7;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: wait;
+    }
+
+    .help {
+      padding: 0 16px 16px;
+      color: #94a3b8;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 8px;
+      }
+
+      #chat {
+        height: 55vh;
+      }
+
+      .composer {
+        padding: 10px;
+      }
+
+      button {
+        padding: 12px;
+      }
+    }
   </style>
 </head>
+
 <body>
-  <h1>My C Chatbot AI</h1>
-  <p>Chat with my learning chatbot.</p>
+  <main class="app">
+    <header>
+      <h1>🥷 Kakashi AI</h1>
+      <p>Your learning chatbot</p>
+      <div id="status">Connecting...</div>
+    </header>
 
-  <div id="chat" aria-live="polite">
-    <p class="bot"><b>AI:</b> Hello! Welcome to my chatbot.</p>
-  </div>
+    <div id="chat" aria-live="polite">
+      <div class="message bot">
+        <span class="label">Kakashi AI</span>
+        Hello, ninja! Send me a message to begin.
+      </div>
+    </div>
 
-  <input id="message" placeholder="Type a message...">
-  <button onclick="sendMessage()">Send</button>
+    <form id="chatForm" class="composer">
+      <input
+        id="message"
+        type="text"
+        placeholder="Talk to Kakashi..."
+        maxlength="1000"
+        autocomplete="off"
+        aria-label="Your message"
+        required
+      >
+      <button id="sendButton" type="submit">Send</button>
+    </form>
+
+    <div class="help">
+      Try: <b>hello</b>, <b>help</b>, or teach Kakashi:<br>
+      <code>learn | What is ICT? | Information and Communication Technology.</code>
+    </div>
+  </main>
 
   <script>
-    function sendMessage() {
-      const input = document.getElementById("message");
-      const chat = document.getElementById("chat");
-      const message = input.value.trim();
+    // STEP 1: Replace this with your actual Cloudflare Worker URL.
+    const WORKER_URL =
+      "https://YOUR-WORKER-NAME.YOUR-SUBDOMAIN.workers.dev";
 
-      if (!message) return;
+    const chat = document.getElementById("chat");
+    const form = document.getElementById("chatForm");
+    const input = document.getElementById("message");
+    const button = document.getElementById("sendButton");
+    const status = document.getElementById("status");
 
-      const userLine = document.createElement("p");
-      userLine.className = "user";
-      userLine.textContent = "You: " + message;
-      chat.appendChild(userLine);
+    function addMessage(sender, message, type) {
+      const bubble = document.createElement("div");
+      bubble.className = "message " + type;
 
-      const botLine = document.createElement("p");
-      botLine.className = "bot";
-      botLine.textContent =
-        "AI: The online chatbot connection is not set up yet.";
-      chat.appendChild(botLine);
+      const label = document.createElement("span");
+      label.className = "label";
+      label.textContent = sender;
 
-      input.value = "";
+      const content = document.createElement("div");
+      content.textContent = message;
+
+      bubble.appendChild(label);
+      bubble.appendChild(content);
+      chat.appendChild(bubble);
+
       chat.scrollTop = chat.scrollHeight;
     }
+
+    async function checkConnection() {
+      try {
+        const response = await fetch(WORKER_URL);
+        if (!response.ok) throw new Error("Connection failed");
+
+        const data = await response.json();
+
+        status.textContent = data.status === "online"
+          ? "● Kakashi's backend is online"
+          : "Backend reached";
+
+        status.style.color = "#4ade80";
+      } catch (error) {
+        status.textContent = "Backend connection needs checking";
+        status.style.color = "#fbbf24";
+      }
+    }
+
+    form.addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      const message = input.value.trim();
+      if (!message || button.disabled) return;
+
+      addMessage("You", message, "user");
+      input.value = "";
+      button.disabled = true;
+      input.disabled = true;
+      button.textContent = "...";
+
+      try {
+        const response = await fetch(WORKER_URL + "/chat", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ message: message })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || "The server returned an error.");
+        }
+
+        addMessage(
+          "Kakashi AI",
+          data.reply || "I received your message but have no reply yet.",
+          "bot"
+        );
+      } catch (error) {
+        addMessage(
+          "Kakashi AI",
+          "I couldn't reach my backend. Please check the Worker URL, deployment and database binding.",
+          "bot"
+        );
+
+        console.error("Kakashi connection error:", error);
+      } finally {
+        button.disabled = false;
+        input.disabled = false;
+        button.textContent = "Send";
+        input.focus();
+      }
+    });
+
+    checkConnection();
   </script>
 </body>
 </html>
