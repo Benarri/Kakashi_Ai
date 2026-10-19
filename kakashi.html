@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My C Chatbot AI</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 16px;
+      background: #f2f4f8;
+    }
+
+    #chat {
+      height: 350px;
+      overflow-y: auto;
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 12px;
+    }
+
+    input, button {
+      padding: 12px;
+      font-size: 16px;
+      margin: 4px 0;
+    }
+
+    input { width: 65%; }
+    button { cursor: pointer; }
+    .user { color: blue; }
+    .bot { color: darkgreen; }
+  </style>
+</head>
+<body>
+  <h1>My C Chatbot AI</h1>
+  <p>Chat with my learning chatbot.</p>
+
+  <div id="chat" aria-live="polite">
+    <p class="bot"><b>AI:</b> Hello! Welcome to my chatbot.</p>
+  </div>
+
+  <input id="message" placeholder="Type a message...">
+  <button onclick="sendMessage()">Send</button>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById("message");
+      const chat = document.getElementById("chat");
+      const message = input.value.trim();
+
+      if (!message) return;
+
+      const userLine = document.createElement("p");
+      userLine.className = "user";
+      userLine.textContent = "You: " + message;
+      chat.appendChild(userLine);
+
+      const botLine = document.createElement("p");
+      botLine.className = "bot";
+      botLine.textContent =
+        "AI: The online chatbot connection is not set up yet.";
+      chat.appendChild(botLine);
+
+      input.value = "";
+      chat.scrollTop = chat.scrollHeight;
+    }
+  </script>
+</body>
+</html>
