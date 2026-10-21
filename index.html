@@ -678,27 +678,42 @@
         Every contribution is appreciated, but completely optional.
       </p>
 
-      <div class="mpesa-card">
-        <div class="mpesa-title">
-          <span class="mpesa-badge">M-PESA</span>
-          Payment details
-        </div>
+      ```html
+<div class="mpesa-card">
+  <div class="mpesa-title">
+    <span class="mpesa-badge">M-PESA</span>
+    Support Kakashi's Creator
+  </div>
 
-        <!-- Replace these placeholders when you provide your details. -->
-        <div class="payment-detail">
-          <span>Payment method</span>
-          <strong id="paymentMethod">Details coming soon</strong>
-        </div>
+  <div class="payment-detail">
+    <span>Payment method</span>
+    <strong>M-Pesa Send Money</strong>
+  </div>
 
-        <div class="payment-detail">
-          <span>Paybill / Till / Phone number</span>
-          <strong id="paymentNumber">Not configured yet</strong>
-        </div>
+  <div class="payment-detail">
+    <span>M-Pesa phone number</span>
+    <strong id="paymentNumber">0180236707</strong>
+  </div>
 
-        <div class="payment-detail">
-          <span>Account name / number</span>
-          <strong id="paymentAccount">Not configured yet</strong>
-        </div>
+  <button
+    type="button"
+    id="copyMpesa"
+    style="width:100%; margin-top:12px;"
+  >
+    Copy M-Pesa Number
+  </button>
+
+  <p class="payment-note">
+    To support the creator, open M-Pesa on your phone,
+    choose Send Money, enter the number above, and follow
+    the instructions displayed on your phone. Check the
+    recipient details before confirming your transaction.
+    Contributions are completely optional. Asante sana!
+  </p>
+
+  <p class="payment-note" id="copyStatus" aria-live="polite"></p>
+</div>
+```
 
         <p class="payment-note" id="paymentNote">
           The creator's verified payment instructions will appear here
@@ -858,6 +873,21 @@
     });
 
     // Check backend availability when the page loads.
+    ```javascript
+// Copy the creator's M-Pesa phone number.
+const copyMpesaButton = document.getElementById("copyMpesa");
+const copyStatus = document.getElementById("copyStatus");
+
+copyMpesaButton.addEventListener("click", async function() {
+  try {
+    await navigator.clipboard.writeText("0180236707");
+    copyStatus.textContent = "M-Pesa number copied!";
+  } catch (error) {
+    copyStatus.textContent =
+      "Please copy this number manually: 0180236707";
+  }
+});
+```
     checkConnection();
   </script>
 </body>
