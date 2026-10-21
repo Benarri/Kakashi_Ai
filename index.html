@@ -1,159 +1,559 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#101827">
+  <meta name="theme-color" content="#101010">
+  <meta name="description" content="Kakashi SENSEI AI — your AI companion for learning, coding, and exploring ideas.">
   <title>Kakashi SENSEI AI</title>
 
   <style>
+    :root {
+      --bg: #0a0a0b;
+      --surface: #131315;
+      --surface-2: #1b1b1f;
+      --border: #2b2b30;
+      --red: #e63946;
+      --red-light: #ff5964;
+      --text: #f5f5f5;
+      --muted: #a1a1aa;
+    }
+
     * {
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
       min-height: 100vh;
-      padding: 20px;
-      background: #101827;
-      color: #f1f5f9;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(ellipse at 50% -20%, #40131855, transparent 55%),
+        var(--bg);
+      color: var(--text);
+    }
+
+    button, input {
+      font: inherit;
+    }
+
+    button {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button:focus-visible,
+    input:focus-visible {
+      outline: 2px solid var(--red-light);
+      outline-offset: 3px;
     }
 
     .app {
       width: 100%;
-      max-width: 720px;
-      background: #1e293b;
-      border: 1px solid #334155;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 15px 45px #0005;
+      max-width: 1050px;
+      min-height: 100vh;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
     }
 
-    header {
-      padding: 22px;
-      text-align: center;
-      background: #172033;
-      border-bottom: 1px solid #334155;
+    /* TOP NAVIGATION */
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      background: #0c0c0def;
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      backdrop-filter: blur(12px);
     }
 
-    header h1 {
-      margin: 0 0 8px;
-      color: #38bdf8;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
     }
 
-    header p {
+    .logo {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      border: 1px solid #69252b;
+      border-radius: 14px;
+      background: linear-gradient(145deg, #351014, #171012);
+      color: var(--red-light);
+      font-size: 23px;
+      box-shadow: 0 0 22px #e6394612;
+    }
+
+    .brand h1 {
       margin: 0;
-      color: #cbd5e1;
+      font-size: 18px;
+      letter-spacing: 1.4px;
+    }
+
+    .brand p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 12px;
     }
 
     #status {
-      margin-top: 12px;
-      font-size: 13px;
       color: #fbbf24;
+      font-size: 12px;
+      text-align: right;
     }
 
-    #chat {
-      height: 400px;
-      overflow-y: auto;
-      padding: 18px;
-      background: #0f172a;
+    /* WELCOME SCREEN */
+
+    .welcome {
+      width: 100%;
+      max-width: 780px;
+      margin: auto;
+      padding: 65px 24px 50px;
+      text-align: center;
     }
 
-    .message {
-      max-width: 90%;
-      padding: 11px 14px;
-      border-radius: 12px;
-      margin-bottom: 12px;
-      overflow-wrap: anywhere;
-      white-space: pre-wrap;
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 13px;
+      color: #ff8189;
+      background: #291316;
+      border: 1px solid #502026;
+      border-radius: 30px;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .welcome h2 {
+      margin: 25px 0 14px;
+      font-size: clamp(32px, 6vw, 52px);
+      line-height: 1.12;
+      letter-spacing: -1.6px;
+    }
+
+    .accent {
+      color: var(--red-light);
+    }
+
+    .welcome-description {
+      max-width: 520px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .section-heading {
+      margin: 38px 0 16px;
+      color: #d4d4d8;
+      text-align: left;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .suggestions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 13px;
+      text-align: left;
+    }
+
+    .suggestion {
+      min-height: 125px;
+      padding: 19px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: linear-gradient(145deg, #19191d, #111113);
+      color: var(--text);
+      text-align: left;
+      cursor: pointer;
+      transition: border-color .2s, transform .2s, background .2s;
+    }
+
+    .suggestion:hover {
+      border-color: #85313a;
+      background: #201719;
+      transform: translateY(-3px);
+    }
+
+    .suggestion-icon {
+      width: 37px;
+      height: 37px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      background: #351519;
+      color: var(--red-light);
+      font-size: 19px;
+    }
+
+    .suggestion strong {
+      font-size: 15px;
+    }
+
+    .suggestion small {
+      color: var(--muted);
+      font-size: 12px;
       line-height: 1.5;
     }
 
+    /* CHAT */
+
+    #chat {
+      width: 100%;
+      max-width: 800px;
+      height: 55vh;
+      min-height: 280px;
+      max-height: 580px;
+      overflow-y: auto;
+      margin: 0 auto;
+      padding: 24px;
+      scroll-behavior: smooth;
+    }
+
+    .message {
+      max-width: 88%;
+      padding: 14px 16px;
+      border-radius: 15px;
+      margin-bottom: 15px;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
     .user {
-      background: #075985;
       margin-left: auto;
-      color: white;
+      background: #572027;
+      border: 1px solid #78303a;
+      color: #fff;
+      border-bottom-right-radius: 4px;
     }
 
     .bot {
-      background: #263449;
       margin-right: auto;
-      color: #e2e8f0;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: #e4e4e7;
+      border-bottom-left-radius: 4px;
     }
 
     .label {
       display: block;
-      font-size: 12px;
+      margin-bottom: 7px;
+      color: var(--red-light);
+      font-size: 11px;
       font-weight: bold;
-      margin-bottom: 5px;
-      color: #7dd3fc;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+    }
+
+    /* MESSAGE COMPOSER */
+
+    .composer-wrap {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 15px 24px 10px;
     }
 
     .composer {
       display: flex;
-      gap: 8px;
-      padding: 14px;
-      background: #1e293b;
+      align-items: center;
+      gap: 10px;
+      padding: 8px;
+      border: 1px solid #39393f;
+      border-radius: 16px;
+      background: #151517;
+      transition: border-color .2s;
+    }
+
+    .composer:focus-within {
+      border-color: #96353e;
     }
 
     #message {
       flex: 1;
+      width: 0;
       min-width: 0;
-      padding: 13px;
-      border: 1px solid #475569;
-      border-radius: 9px;
-      background: #0f172a;
-      color: white;
-      font-size: 16px;
-      outline: none;
-    }
-
-    #message:focus {
-      border-color: #38bdf8;
-    }
-
-    button {
-      padding: 12px 18px;
+      padding: 12px;
       border: none;
-      border-radius: 9px;
-      background: #0284c7;
+      outline: none;
+      background: transparent;
       color: white;
-      font-weight: bold;
-      cursor: pointer;
+      font-size: 15px;
     }
 
-    button:disabled {
-      opacity: 0.5;
+    #message::placeholder {
+      color: #777780;
+    }
+
+    #sendButton {
+      width: 45px;
+      height: 45px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      border: none;
+      border-radius: 12px;
+      background: var(--red);
+      color: white;
+      font-size: 23px;
+      cursor: pointer;
+      transition: background .2s;
+    }
+
+    #sendButton:hover {
+      background: #ff4552;
+    }
+
+    #sendButton:disabled {
+      opacity: .5;
       cursor: wait;
     }
 
-    .help {
-      padding: 0 16px 16px;
-      color: #94a3b8;
-      font-size: 13px;
+    .disclaimer {
+      margin: 10px 0 0;
+      color: #777780;
+      text-align: center;
+      font-size: 11px;
       line-height: 1.6;
     }
 
-    @media (max-width: 480px) {
-      body {
-        padding: 8px;
+    /* SUPPORT CREATOR MODAL */
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: #000c;
+      backdrop-filter: blur(7px);
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .support-modal {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+      padding: 28px;
+      border: 1px solid #49252a;
+      border-radius: 22px;
+      background: linear-gradient(145deg, #1b1517, #111113 70%);
+      box-shadow: 0 25px 80px #0009;
+      animation: appear .2s ease-out;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(10px) scale(.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #242428;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .support-icon {
+      width: 55px;
+      height: 55px;
+      display: grid;
+      place-items: center;
+      border: 1px solid #703038;
+      border-radius: 16px;
+      background: #34161b;
+      color: #ff6974;
+      font-size: 26px;
+    }
+
+    .support-modal h2 {
+      margin: 20px 0 10px;
+      font-size: 25px;
+    }
+
+    .support-modal > p {
+      color: #b4b4bc;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .mpesa-card {
+      margin-top: 22px;
+      padding: 18px;
+      border: 1px solid #3a3435;
+      border-radius: 14px;
+      background: #171719;
+    }
+
+    .mpesa-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 14px;
+      color: #f5f5f5;
+      font-weight: bold;
+    }
+
+    .mpesa-badge {
+      padding: 6px 9px;
+      border-radius: 6px;
+      background: #173a2c;
+      color: #6ee7a1;
+      font-size: 11px;
+    }
+
+    .payment-detail {
+      padding: 12px 0;
+      border-top: 1px solid #303034;
+    }
+
+    .payment-detail span {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .payment-detail strong {
+      overflow-wrap: anywhere;
+      font-size: 14px;
+    }
+
+    .payment-note {
+      color: #a1a1aa;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .footer {
+      padding: 22px;
+      color: #66666e;
+      text-align: center;
+      font-size: 11px;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 520px) {
+      .topbar {
+        padding: 14px;
+      }
+
+      .logo {
+        width: 39px;
+        height: 39px;
+      }
+
+      .brand h1 {
+        font-size: 15px;
+      }
+
+      .brand p {
+        font-size: 11px;
+      }
+
+      #status {
+        max-width: 115px;
+        font-size: 10px;
+        line-height: 1.5;
+      }
+
+      .welcome {
+        padding: 45px 17px 30px;
+      }
+
+      .welcome h2 {
+        letter-spacing: -1px;
+      }
+
+      .welcome-description {
+        font-size: 14px;
+      }
+
+      .suggestions {
+        gap: 10px;
+      }
+
+      .suggestion {
+        min-height: 130px;
+        padding: 13px;
+        border-radius: 13px;
+      }
+
+      .suggestion strong {
+        font-size: 13px;
+      }
+
+      .suggestion small {
+        font-size: 11px;
       }
 
       #chat {
-        height: 55vh;
+        height: 52vh;
+        padding: 16px;
       }
 
-      .composer {
-        padding: 10px;
+      .message {
+        max-width: 94%;
       }
 
-      button {
+      .composer-wrap {
         padding: 12px;
+      }
+
+      .support-modal {
+        padding: 23px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
       }
     }
   </style>
@@ -161,50 +561,170 @@
 
 <body>
   <main class="app">
-    <header>
-      <h1>🥷 Kakashi AI</h1>
-      <p>Your learning chatbot</p>
-      <div id="status">Connecting...</div>
+
+    <!-- HEADER -->
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">忍</div>
+        <div>
+          <h1>KAKASHI SENSEI</h1>
+          <p>Your AI companion</p>
+        </div>
+      </div>
+      <div id="status" role="status">Connecting...</div>
     </header>
 
-    <div id="chat" aria-live="polite">
+    <!-- WELCOME SCREEN -->
+    <section class="welcome" id="welcome">
+      <div class="eyebrow">
+        <span>✦</span> Your next idea starts here
+      </div>
+
+      <h2>
+        What's on your<br>
+        <span class="accent">mind, ninja?</span>
+      </h2>
+
+      <p class="welcome-description">
+        Explore ideas, learn to code, solve problems, and discover
+        something new. Kakashi is ready when you are.
+      </p>
+
+      <h3 class="section-heading">EXPLORE WITH KAKASHI</h3>
+
+      <div class="suggestions">
+
+        <button class="suggestion" type="button"
+          data-prompt="Teach me the basics of programming with a simple example.">
+          <span class="suggestion-icon">⌘</span>
+          <strong>Learn Coding</strong>
+          <small>Explore programming and build your skills.</small>
+        </button>
+
+        <button class="suggestion" type="button"
+          data-prompt="What can you help me with? Give me some interesting examples.">
+          <span class="suggestion-icon">✧</span>
+          <strong>Ask Kakashi</strong>
+          <small>Ask questions and explore new ideas.</small>
+        </button>
+
+        <button class="suggestion" type="button"
+          data-prompt="Help me understand a difficult topic step by step.">
+          <span class="suggestion-icon">▤</span>
+          <strong>Study Smarter</strong>
+          <small>Understand concepts one step at a time.</small>
+        </button>
+
+        <button class="suggestion" id="supportButton" type="button">
+          <span class="suggestion-icon">♡</span>
+          <strong>Support Creator</strong>
+          <small>Support the development of Kakashi AI.</small>
+        </button>
+
+      </div>
+    </section>
+
+    <!-- CHAT MESSAGES -->
+    <section id="chat" aria-label="Chat messages"
+      aria-live="polite" hidden>
       <div class="message bot">
         <span class="label">Kakashi AI</span>
-        Hello, ninja! Send me a message to begin.
+        Hello, ninja! I'm ready. What shall we explore today?
       </div>
+    </section>
+
+    <!-- MESSAGE INPUT -->
+    <div class="composer-wrap">
+      <form id="chatForm" class="composer">
+        <input
+          id="message"
+          type="text"
+          placeholder="Message Kakashi..."
+          maxlength="1000"
+          autocomplete="off"
+          aria-label="Your message"
+          required
+        >
+        <button id="sendButton" type="submit"
+          aria-label="Send message" title="Send message">↑</button>
+      </form>
+      <p class="disclaimer">
+        Kakashi AI can make mistakes. Check important information.
+      </p>
     </div>
 
-    <form id="chatForm" class="composer">
-      <input
-        id="message"
-        type="text"
-        placeholder="Talk to Kakashi..."
-        maxlength="1000"
-        autocomplete="off"
-        aria-label="Your message"
-        required
-      >
-      <button id="sendButton" type="submit">Send</button>
-    </form>
+    <footer class="footer">
+      KAKASHI SENSEI AI · Built with curiosity.
+    </footer>
 
-    <div class="help">
-      Try: <b>hello</b>, <b>help</b>, or teach Kakashi:<br>
-      <code>learn | What is ICT? | Information and Communication Technology.</code>
-    </div>
   </main>
 
+  <!-- SUPPORT CREATOR PANEL -->
+  <div class="modal-backdrop" id="supportModal"
+    role="dialog" aria-modal="true"
+    aria-labelledby="supportTitle">
+
+    <section class="support-modal">
+      <button class="close-modal" id="closeSupport"
+        type="button" aria-label="Close support panel">×</button>
+
+      <div class="support-icon" aria-hidden="true">♡</div>
+
+      <h2 id="supportTitle">Support the <span class="accent">Creator</span></h2>
+
+      <p>
+        Kakashi AI is a growing project. Your support can help its
+        creator improve the experience and build more features.
+        Every contribution is appreciated, but completely optional.
+      </p>
+
+      <div class="mpesa-card">
+        <div class="mpesa-title">
+          <span class="mpesa-badge">M-PESA</span>
+          Payment details
+        </div>
+
+        <!-- Replace these placeholders when you provide your details. -->
+        <div class="payment-detail">
+          <span>Payment method</span>
+          <strong id="paymentMethod">Details coming soon</strong>
+        </div>
+
+        <div class="payment-detail">
+          <span>Paybill / Till / Phone number</span>
+          <strong id="paymentNumber">Not configured yet</strong>
+        </div>
+
+        <div class="payment-detail">
+          <span>Account name / number</span>
+          <strong id="paymentAccount">Not configured yet</strong>
+        </div>
+
+        <p class="payment-note" id="paymentNote">
+          The creator's verified payment instructions will appear here
+          once they have been added.
+        </p>
+      </div>
+    </section>
+  </div>
+
   <script>
-    
-    // Cloudflare Worker URL
-const WORKER_URL =
-  "https://wandering-night-d846kakashi-ai-api.benardserton436.workers.dev";
-    
+    // Existing Cloudflare Worker URL — preserved.
+    const WORKER_URL =
+      "https://wandering-night-d846kakashi-ai-api.benardserton436.workers.dev";
+
     const chat = document.getElementById("chat");
+    const welcome = document.getElementById("welcome");
     const form = document.getElementById("chatForm");
     const input = document.getElementById("message");
     const button = document.getElementById("sendButton");
     const status = document.getElementById("status");
 
+    const supportModal = document.getElementById("supportModal");
+    const supportButton = document.getElementById("supportButton");
+    const closeSupport = document.getElementById("closeSupport");
+
+    // Add a message safely without interpreting it as HTML.
     function addMessage(sender, message, type) {
       const bubble = document.createElement("div");
       bubble.className = "message " + type;
@@ -223,6 +743,49 @@ const WORKER_URL =
       chat.scrollTop = chat.scrollHeight;
     }
 
+    // Show the conversation and hide the welcome screen.
+    function openChat() {
+      welcome.hidden = true;
+      chat.hidden = false;
+    }
+
+    // Welcome cards insert a suggested prompt into the composer.
+    document.querySelectorAll("[data-prompt]").forEach(function(card) {
+      card.addEventListener("click", function() {
+        input.value = card.dataset.prompt;
+        input.focus();
+      });
+    });
+
+    // Support Creator panel.
+    function openSupport() {
+      supportModal.classList.add("open");
+      closeSupport.focus();
+    }
+
+    function hideSupport() {
+      supportModal.classList.remove("open");
+      supportButton.focus();
+    }
+
+    supportButton.addEventListener("click", openSupport);
+    closeSupport.addEventListener("click", hideSupport);
+
+    // Close the panel by clicking outside it or pressing Escape.
+    supportModal.addEventListener("click", function(event) {
+      if (event.target === supportModal) {
+        hideSupport();
+      }
+    });
+
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Escape" &&
+          supportModal.classList.contains("open")) {
+        hideSupport();
+      }
+    });
+
+    // Check the existing Worker health endpoint.
     async function checkConnection() {
       try {
         const response = await fetch(WORKER_URL);
@@ -231,27 +794,30 @@ const WORKER_URL =
         const data = await response.json();
 
         status.textContent = data.status === "online"
-          ? "● Kakashi's backend is online"
-          : "Backend reached";
+          ? "● Kakashi is online"
+          : "● Backend reached";
 
         status.style.color = "#4ade80";
       } catch (error) {
-        status.textContent = "Backend connection needs checking";
+        status.textContent = "● Connection needs checking";
         status.style.color = "#fbbf24";
       }
     }
 
+    // Existing chat API request format preserved.
     form.addEventListener("submit", async function(event) {
       event.preventDefault();
 
       const message = input.value.trim();
       if (!message || button.disabled) return;
 
+      openChat();
       addMessage("You", message, "user");
+
       input.value = "";
       button.disabled = true;
       input.disabled = true;
-      button.textContent = "...";
+      button.textContent = "…";
 
       try {
         const response = await fetch(WORKER_URL + "/chat", {
@@ -265,7 +831,9 @@ const WORKER_URL =
         const data = await response.json();
 
         if (!response.ok) {
-          throw new Error(data.error || "The server returned an error.");
+          throw new Error(
+            data.error || "The server returned an error."
+          );
         }
 
         addMessage(
@@ -276,7 +844,7 @@ const WORKER_URL =
       } catch (error) {
         addMessage(
           "Kakashi AI",
-          "I couldn't reach my backend. Please check the Worker URL, deployment and database binding.",
+          "I couldn't reach my backend. Please check the connection and try again.",
           "bot"
         );
 
@@ -284,12 +852,14 @@ const WORKER_URL =
       } finally {
         button.disabled = false;
         input.disabled = false;
-        button.textContent = "Send";
+        button.textContent = "↑";
         input.focus();
       }
     });
 
+    // Check backend availability when the page loads.
     checkConnection();
   </script>
 </body>
 </html>
+```
