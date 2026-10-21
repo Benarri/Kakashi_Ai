@@ -1,4 +1,4 @@
-```html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -235,10 +235,9 @@
       max-width: 88%;
       padding: 14px 16px;
       border-radius: 15px;
-      margin-bottom: 15px;
+      margin-bottom: 18px;
       overflow-wrap: anywhere;
-      white-space: pre-wrap;
-      line-height: 1.7;
+      line-height: 1.75;
       font-size: 14px;
     }
 
@@ -260,12 +259,127 @@
 
     .label {
       display: block;
-      margin-bottom: 7px;
+      margin-bottom: 12px;
       color: var(--red-light);
       font-size: 11px;
       font-weight: bold;
       letter-spacing: .8px;
       text-transform: uppercase;
+    }
+
+    /* FORMATTED AI RESPONSES */
+
+    .message-content {
+      min-width: 0;
+      line-height: 1.85;
+      overflow-wrap: anywhere;
+    }
+
+    .message-content > :first-child {
+      margin-top: 0;
+    }
+
+    .message-content > :last-child {
+      margin-bottom: 0;
+    }
+
+    .message-content p {
+      margin: 0 0 15px;
+      line-height: 1.85;
+    }
+
+    .message-content h1,
+    .message-content h2,
+    .message-content h3,
+    .message-content h4 {
+      margin: 23px 0 11px;
+      color: #fff;
+      line-height: 1.4;
+      font-weight: 700;
+    }
+
+    .message-content h1 {
+      font-size: 1.35em;
+    }
+
+    .message-content h2 {
+      font-size: 1.22em;
+    }
+
+    .message-content h3,
+    .message-content h4 {
+      font-size: 1.08em;
+    }
+
+    .message-content strong {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .message-content em {
+      color: #f4dfe1;
+    }
+
+    .message-content ul,
+    .message-content ol {
+      margin: 9px 0 19px;
+      padding-left: 25px;
+    }
+
+    .message-content li {
+      padding-left: 3px;
+      margin: 0 0 9px;
+      line-height: 1.8;
+    }
+
+    .message-content li:last-child {
+      margin-bottom: 0;
+    }
+
+    .message-content code {
+      padding: 2px 6px;
+      border: 1px solid #393940;
+      border-radius: 5px;
+      background: #101013;
+      color: #ff9aa2;
+      font-family: Consolas, Monaco, monospace;
+      font-size: .92em;
+      overflow-wrap: anywhere;
+    }
+
+    .message-content pre {
+      max-width: 100%;
+      margin: 13px 0 19px;
+      padding: 14px;
+      overflow-x: auto;
+      border: 1px solid #38383f;
+      border-radius: 10px;
+      background: #0c0c0e;
+      color: #e7e7eb;
+      font: 13px/1.7 Consolas, Monaco, monospace;
+      white-space: pre;
+    }
+
+    .message-content pre code {
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      overflow-wrap: normal;
+    }
+
+    .message-content blockquote {
+      margin: 13px 0 17px;
+      padding: 3px 0 3px 13px;
+      border-left: 3px solid var(--red);
+      color: #c4c4cc;
+    }
+
+    .message-content hr {
+      margin: 19px 0;
+      border: 0;
+      border-top: 1px solid var(--border);
     }
 
     /* MESSAGE COMPOSER */
@@ -362,6 +476,8 @@
       position: relative;
       width: 100%;
       max-width: 440px;
+      max-height: 90vh;
+      overflow-y: auto;
       padding: 28px;
       border: 1px solid #49252a;
       border-radius: 22px;
@@ -458,6 +574,21 @@
     .payment-detail strong {
       overflow-wrap: anywhere;
       font-size: 14px;
+    }
+
+    .copy-button {
+      width: 100%;
+      margin-top: 12px;
+      padding: 12px;
+      border: 1px solid #78303a;
+      border-radius: 9px;
+      background: #351519;
+      color: white;
+      cursor: pointer;
+    }
+
+    .copy-button:hover {
+      background: #572027;
     }
 
     .payment-note {
@@ -593,7 +724,6 @@
       <h3 class="section-heading">EXPLORE WITH KAKASHI</h3>
 
       <div class="suggestions">
-
         <button class="suggestion" type="button"
           data-prompt="Teach me the basics of programming with a simple example.">
           <span class="suggestion-icon">⌘</span>
@@ -620,7 +750,6 @@
           <strong>Support Creator</strong>
           <small>Support the development of Kakashi AI.</small>
         </button>
-
       </div>
     </section>
 
@@ -629,7 +758,9 @@
       aria-live="polite" hidden>
       <div class="message bot">
         <span class="label">Kakashi AI</span>
-        Hello, ninja! I'm ready. What shall we explore today?
+        <div class="message-content">
+          <p>Hello, ninja! I'm ready. What shall we explore today?</p>
+        </div>
       </div>
     </section>
 
@@ -678,47 +809,33 @@
         Every contribution is appreciated, but completely optional.
       </p>
 
-      ```html
-<div class="mpesa-card">
-  <div class="mpesa-title">
-    <span class="mpesa-badge">M-PESA</span>
-    Support Kakashi's Creator
-  </div>
+      <div class="mpesa-card">
+        <div class="mpesa-title">
+          <span class="mpesa-badge">M-PESA</span>
+          Support Kakashi's Creator
+        </div>
 
-  <div class="payment-detail">
-    <span>Payment method</span>
-    <strong>M-Pesa Send Money</strong>
-  </div>
+        <div class="payment-detail">
+          <span>Payment method</span>
+          <strong>M-Pesa Send Money</strong>
+        </div>
 
-  <div class="payment-detail">
-    <span>M-Pesa phone number</span>
-    <strong id="paymentNumber">0180236707</strong>
-  </div>
+        <div class="payment-detail">
+          <span>M-Pesa phone number</span>
+          <strong id="paymentNumber">0180236707</strong>
+        </div>
 
-  <button
-    type="button"
-    id="copyMpesa"
-    style="width:100%; margin-top:12px;"
-  >
-    Copy M-Pesa Number
-  </button>
+        <button type="button" id="copyMpesa" class="copy-button">
+          Copy M-Pesa Number
+        </button>
 
-  <p class="payment-note">
-    To support the creator, open M-Pesa on your phone,
-    choose Send Money, enter the number above, and follow
-    the instructions displayed on your phone. Check the
-    recipient details before confirming your transaction.
-    Contributions are completely optional. Asante sana!
-  </p>
-
-  <p class="payment-note" id="copyStatus" aria-live="polite"></p>
-</div>
-```
-
-        <p class="payment-note" id="paymentNote">
-          The creator's verified payment instructions will appear here
-          once they have been added.
+        <p class="payment-note">
+          Contributions are completely optional. If you choose to
+          contribute, check the recipient details carefully before
+          confirming any transaction. Asante sana!
         </p>
+
+        <p class="payment-note" id="copyStatus" aria-live="polite"></p>
       </div>
     </section>
   </div>
@@ -739,7 +856,224 @@
     const supportButton = document.getElementById("supportButton");
     const closeSupport = document.getElementById("closeSupport");
 
-    // Add a message safely without interpreting it as HTML.
+    /*
+      SAFE MARKDOWN FORMATTING
+
+      Supports:
+      **bold text**
+      *italic text*
+      `inline code`
+      # Headings
+      - Bullet lists
+      1. Numbered lists
+      ``` Code blocks ```
+      > Blockquotes
+
+      The response is built with DOM elements and text nodes,
+      not innerHTML, to avoid interpreting replies as HTML.
+    */
+
+    function appendInlineMarkdown(parent, text) {
+      const pattern = /(\*\*[^*\n]+\*\*|\*[^*\n]+\*|`[^`\n]+`)/g;
+
+      let lastIndex = 0;
+      let match;
+
+      while ((match = pattern.exec(text)) !== null) {
+        if (match.index > lastIndex) {
+          parent.appendChild(
+            document.createTextNode(text.slice(lastIndex, match.index))
+          );
+        }
+
+        const token = match[0];
+        let element;
+        let content;
+
+        if (token.startsWith("**")) {
+          element = document.createElement("strong");
+          content = token.slice(2, -2);
+        } else if (token.startsWith("*")) {
+          element = document.createElement("em");
+          content = token.slice(1, -1);
+        } else {
+          element = document.createElement("code");
+          content = token.slice(1, -1);
+        }
+
+        element.textContent = content;
+        parent.appendChild(element);
+
+        lastIndex = pattern.lastIndex;
+      }
+
+      if (lastIndex < text.length) {
+        parent.appendChild(
+          document.createTextNode(text.slice(lastIndex))
+        );
+      }
+    }
+
+    function renderMarkdown(container, markdown) {
+      const lines = String(markdown)
+        .replace(/\r\n?/g, "\n")
+        .split("\n");
+
+      let i = 0;
+
+      while (i < lines.length) {
+        const line = lines[i];
+        const trimmed = line.trim();
+
+        // Ignore empty lines. CSS provides the visual spacing.
+        if (!trimmed) {
+          i++;
+          continue;
+        }
+
+        // Fenced code blocks
+        if (trimmed.startsWith("```")) {
+          i++;
+
+          const codeLines = [];
+
+          while (
+            i < lines.length &&
+            !lines[i].trim().startsWith("```")
+          ) {
+            codeLines.push(lines[i]);
+            i++;
+          }
+
+          if (i < lines.length) {
+            i++;
+          }
+
+          const pre = document.createElement("pre");
+          const code = document.createElement("code");
+
+          code.textContent = codeLines.join("\n");
+          pre.appendChild(code);
+          container.appendChild(pre);
+
+          continue;
+        }
+
+        // Horizontal divider
+        if (
+          /^(\*\s*){3,}$/.test(trimmed) ||
+          /^(-\s*){3,}$/.test(trimmed) ||
+          /^_{3,}$/.test(trimmed)
+        ) {
+          container.appendChild(document.createElement("hr"));
+          i++;
+          continue;
+        }
+
+        // Headings
+        const headingMatch = trimmed.match(/^(#{1,4})\s+(.+)$/);
+
+        if (headingMatch) {
+          const heading = document.createElement(
+            "h" + headingMatch[1].length
+          );
+
+          appendInlineMarkdown(heading, headingMatch[2]);
+          container.appendChild(heading);
+
+          i++;
+          continue;
+        }
+
+        // Blockquotes
+        if (trimmed.startsWith(">")) {
+          const quote = document.createElement("blockquote");
+          const quoteLines = [];
+
+          while (
+            i < lines.length &&
+            lines[i].trim().startsWith(">")
+          ) {
+            quoteLines.push(
+              lines[i].trim().replace(/^>\s?/, "")
+            );
+
+            i++;
+          }
+
+          appendInlineMarkdown(quote, quoteLines.join(" "));
+          container.appendChild(quote);
+
+          continue;
+        }
+
+        // Bullet lists and numbered lists
+        const isBullet = /^[-*+]\s+/.test(trimmed);
+        const isNumbered = /^\d+[.)]\s+/.test(trimmed);
+
+        if (isBullet || isNumbered) {
+          const list = document.createElement(isBullet ? "ul" : "ol");
+
+          while (i < lines.length) {
+            const current = lines[i].trim();
+
+            const bulletMatch = current.match(/^[-*+]\s+(.+)$/);
+            const numberMatch = current.match(/^\d+[.)]\s+(.+)$/);
+
+            const itemText = isBullet
+              ? (bulletMatch && bulletMatch[1])
+              : (numberMatch && numberMatch[1]);
+
+            if (!itemText) {
+              break;
+            }
+
+            const item = document.createElement("li");
+
+            appendInlineMarkdown(item, itemText);
+            list.appendChild(item);
+
+            i++;
+          }
+
+          container.appendChild(list);
+          continue;
+        }
+
+        // Normal paragraphs. Join wrapped lines until a new block starts.
+        const paragraphLines = [];
+
+        while (i < lines.length && lines[i].trim()) {
+          const current = lines[i].trim();
+
+          if (
+            paragraphLines.length > 0 &&
+            (
+              current.startsWith("```") ||
+              /^#{1,4}\s+/.test(current) ||
+              current.startsWith(">") ||
+              /^[-*+]\s+/.test(current) ||
+              /^\d+[.)]\s+/.test(current) ||
+              /^(\*\s*){3,}$/.test(current) ||
+              /^(-\s*){3,}$/.test(current) ||
+              /^_{3,}$/.test(current)
+            )
+          ) {
+            break;
+          }
+
+          paragraphLines.push(current);
+          i++;
+        }
+
+        const paragraph = document.createElement("p");
+
+        appendInlineMarkdown(paragraph, paragraphLines.join(" "));
+        container.appendChild(paragraph);
+      }
+    }
+
+    // Add messages and format AI replies safely.
     function addMessage(sender, message, type) {
       const bubble = document.createElement("div");
       bubble.className = "message " + type;
@@ -749,7 +1083,13 @@
       label.textContent = sender;
 
       const content = document.createElement("div");
-      content.textContent = message;
+      content.className = "message-content";
+
+      if (type === "bot") {
+        renderMarkdown(content, message);
+      } else {
+        content.textContent = message;
+      }
 
       bubble.appendChild(label);
       bubble.appendChild(content);
@@ -794,9 +1134,28 @@
     });
 
     document.addEventListener("keydown", function(event) {
-      if (event.key === "Escape" &&
-          supportModal.classList.contains("open")) {
+      if (
+        event.key === "Escape" &&
+        supportModal.classList.contains("open")
+      ) {
         hideSupport();
+      }
+    });
+
+    // Copy the creator's M-Pesa number.
+    const copyMpesaButton = document.getElementById("copyMpesa");
+    const copyStatus = document.getElementById("copyStatus");
+    const paymentNumber = document.getElementById("paymentNumber");
+
+    copyMpesaButton.addEventListener("click", async function() {
+      const number = paymentNumber.textContent.trim();
+
+      try {
+        await navigator.clipboard.writeText(number);
+        copyStatus.textContent = "M-Pesa number copied!";
+      } catch (error) {
+        copyStatus.textContent =
+          "Please copy this number manually: " + number;
       }
     });
 
@@ -804,7 +1163,10 @@
     async function checkConnection() {
       try {
         const response = await fetch(WORKER_URL);
-        if (!response.ok) throw new Error("Connection failed");
+
+        if (!response.ok) {
+          throw new Error("Connection failed");
+        }
 
         const data = await response.json();
 
@@ -824,7 +1186,10 @@
       event.preventDefault();
 
       const message = input.value.trim();
-      if (!message || button.disabled) return;
+
+      if (!message || button.disabled) {
+        return;
+      }
 
       openChat();
       addMessage("You", message, "user");
@@ -873,23 +1238,7 @@
     });
 
     // Check backend availability when the page loads.
-    ```javascript
-// Copy the creator's M-Pesa phone number.
-const copyMpesaButton = document.getElementById("copyMpesa");
-const copyStatus = document.getElementById("copyStatus");
-
-copyMpesaButton.addEventListener("click", async function() {
-  try {
-    await navigator.clipboard.writeText("0180236707");
-    copyStatus.textContent = "M-Pesa number copied!";
-  } catch (error) {
-    copyStatus.textContent =
-      "Please copy this number manually: 0180236707";
-  }
-});
-```
     checkConnection();
   </script>
 </body>
 </html>
-```
