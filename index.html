@@ -20,13 +20,9 @@
       --muted: #a1a1aa;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
@@ -38,13 +34,8 @@
       color: var(--text);
     }
 
-    button, input {
-      font: inherit;
-    }
-
-    button {
-      -webkit-tap-highlight-color: transparent;
-    }
+    button, input { font: inherit; }
+    button { -webkit-tap-highlight-color: transparent; }
 
     button:focus-visible,
     input:focus-visible {
@@ -116,13 +107,13 @@
       text-align: right;
     }
 
-    /* WELCOME SCREEN */
+    /* WELCOME SCREEN — MOVED HIGHER */
 
     .welcome {
       width: 100%;
       max-width: 780px;
-      margin: auto;
-      padding: 65px 24px 50px;
+      margin: 0 auto;
+      padding: 35px 24px 20px;
       text-align: center;
     }
 
@@ -147,9 +138,7 @@
       letter-spacing: -1.6px;
     }
 
-    .accent {
-      color: var(--red-light);
-    }
+    .accent { color: var(--red-light); }
 
     .welcome-description {
       max-width: 520px;
@@ -160,7 +149,7 @@
     }
 
     .section-heading {
-      margin: 38px 0 16px;
+      margin: 30px 0 16px;
       color: #d4d4d8;
       text-align: left;
       font-size: 13px;
@@ -207,9 +196,7 @@
       font-size: 19px;
     }
 
-    .suggestion strong {
-      font-size: 15px;
-    }
+    .suggestion strong { font-size: 15px; }
 
     .suggestion small {
       color: var(--muted);
@@ -275,13 +262,8 @@
       overflow-wrap: anywhere;
     }
 
-    .message-content > :first-child {
-      margin-top: 0;
-    }
-
-    .message-content > :last-child {
-      margin-bottom: 0;
-    }
+    .message-content > :first-child { margin-top: 0; }
+    .message-content > :last-child { margin-bottom: 0; }
 
     .message-content p {
       margin: 0 0 15px;
@@ -298,27 +280,18 @@
       font-weight: 700;
     }
 
-    .message-content h1 {
-      font-size: 1.35em;
-    }
-
-    .message-content h2 {
-      font-size: 1.22em;
-    }
+    .message-content h1 { font-size: 1.35em; }
+    .message-content h2 { font-size: 1.22em; }
 
     .message-content h3,
-    .message-content h4 {
-      font-size: 1.08em;
-    }
+    .message-content h4 { font-size: 1.08em; }
 
     .message-content strong {
       color: #fff;
       font-weight: 700;
     }
 
-    .message-content em {
-      color: #f4dfe1;
-    }
+    .message-content em { color: #f4dfe1; }
 
     .message-content ul,
     .message-content ol {
@@ -332,9 +305,7 @@
       line-height: 1.8;
     }
 
-    .message-content li:last-child {
-      margin-bottom: 0;
-    }
+    .message-content li:last-child { margin-bottom: 0; }
 
     .message-content code {
       padding: 2px 6px;
@@ -382,11 +353,11 @@
       border-top: 1px solid var(--border);
     }
 
-    /* MESSAGE COMPOSER */
+    /* MESSAGE COMPOSER — WIDER AND TALLER */
 
     .composer-wrap {
       width: 100%;
-      max-width: 800px;
+      max-width: 850px;
       margin: 0 auto;
       padding: 15px 24px 10px;
     }
@@ -402,25 +373,22 @@
       transition: border-color .2s;
     }
 
-    .composer:focus-within {
-      border-color: #96353e;
-    }
+    .composer:focus-within { border-color: #96353e; }
 
     #message {
       flex: 1;
       width: 0;
       min-width: 0;
-      padding: 12px;
+      min-height: 52px;
+      padding: 15px 14px;
       border: none;
       outline: none;
       background: transparent;
       color: white;
-      font-size: 15px;
+      font-size: 16px;
     }
 
-    #message::placeholder {
-      color: #777780;
-    }
+    #message::placeholder { color: #777780; }
 
     #sendButton {
       width: 45px;
@@ -437,9 +405,7 @@
       transition: background .2s;
     }
 
-    #sendButton:hover {
-      background: #ff4552;
-    }
+    #sendButton:hover { background: #ff4552; }
 
     #sendButton:disabled {
       opacity: .5;
@@ -468,9 +434,7 @@
       backdrop-filter: blur(7px);
     }
 
-    .modal-backdrop.open {
-      display: flex;
-    }
+    .modal-backdrop.open { display: flex; }
 
     .support-modal {
       position: relative;
@@ -487,14 +451,8 @@
     }
 
     @keyframes appear {
-      from {
-        opacity: 0;
-        transform: translateY(10px) scale(.98);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+      from { opacity: 0; transform: translateY(10px) scale(.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     .close-modal {
@@ -587,9 +545,7 @@
       cursor: pointer;
     }
 
-    .copy-button:hover {
-      background: #572027;
-    }
+    .copy-button:hover { background: #572027; }
 
     .payment-note {
       color: #a1a1aa;
@@ -604,27 +560,18 @@
       font-size: 11px;
     }
 
-    [hidden] {
-      display: none !important;
-    }
+    [hidden] { display: none !important; }
 
     @media (max-width: 520px) {
-      .topbar {
-        padding: 14px;
-      }
+      .topbar { padding: 14px; }
 
       .logo {
         width: 39px;
         height: 39px;
       }
 
-      .brand h1 {
-        font-size: 15px;
-      }
-
-      .brand p {
-        font-size: 11px;
-      }
+      .brand h1 { font-size: 15px; }
+      .brand p { font-size: 11px; }
 
       #status {
         max-width: 115px;
@@ -632,21 +579,10 @@
         line-height: 1.5;
       }
 
-      .welcome {
-        padding: 45px 17px 30px;
-      }
-
-      .welcome h2 {
-        letter-spacing: -1px;
-      }
-
-      .welcome-description {
-        font-size: 14px;
-      }
-
-      .suggestions {
-        gap: 10px;
-      }
+      .welcome { padding: 28px 17px 20px; }
+      .welcome h2 { letter-spacing: -1px; }
+      .welcome-description { font-size: 14px; }
+      .suggestions { gap: 10px; }
 
       .suggestion {
         min-height: 130px;
@@ -654,30 +590,24 @@
         border-radius: 13px;
       }
 
-      .suggestion strong {
-        font-size: 13px;
-      }
-
-      .suggestion small {
-        font-size: 11px;
-      }
+      .suggestion strong { font-size: 13px; }
+      .suggestion small { font-size: 11px; }
 
       #chat {
         height: 52vh;
         padding: 16px;
       }
 
-      .message {
-        max-width: 94%;
+      .message { max-width: 94%; }
+      .composer-wrap { padding: 12px; }
+
+      #message {
+        min-height: 50px;
+        padding: 13px 10px;
+        font-size: 16px;
       }
 
-      .composer-wrap {
-        padding: 12px;
-      }
-
-      .support-modal {
-        padding: 23px;
-      }
+      .support-modal { padding: 23px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -770,7 +700,7 @@
         <input
           id="message"
           type="text"
-          placeholder="Message Kakashi..."
+          placeholder="Ask Kakashi..."
           maxlength="1000"
           autocomplete="off"
           aria-label="Your message"
@@ -859,23 +789,12 @@
     /*
       SAFE MARKDOWN FORMATTING
 
-      Supports:
-      **bold text**
-      *italic text*
-      `inline code`
-      # Headings
-      - Bullet lists
-      1. Numbered lists
-      ``` Code blocks ```
-      > Blockquotes
-
-      The response is built with DOM elements and text nodes,
-      not innerHTML, to avoid interpreting replies as HTML.
+      Supports bold, italic, inline code, headings,
+      lists, fenced code blocks, and blockquotes.
     */
 
     function appendInlineMarkdown(parent, text) {
       const pattern = /(\*\*[^*\n]+\*\*|\*[^*\n]+\*|`[^`\n]+`)/g;
-
       let lastIndex = 0;
       let match;
 
@@ -903,7 +822,6 @@
 
         element.textContent = content;
         parent.appendChild(element);
-
         lastIndex = pattern.lastIndex;
       }
 
@@ -925,37 +843,28 @@
         const line = lines[i];
         const trimmed = line.trim();
 
-        // Ignore empty lines. CSS provides the visual spacing.
         if (!trimmed) {
           i++;
           continue;
         }
 
-        // Fenced code blocks
+        // Code blocks
         if (trimmed.startsWith("```")) {
           i++;
-
           const codeLines = [];
 
-          while (
-            i < lines.length &&
-            !lines[i].trim().startsWith("```")
-          ) {
+          while (i < lines.length && !lines[i].trim().startsWith("```")) {
             codeLines.push(lines[i]);
             i++;
           }
 
-          if (i < lines.length) {
-            i++;
-          }
+          if (i < lines.length) i++;
 
           const pre = document.createElement("pre");
           const code = document.createElement("code");
-
           code.textContent = codeLines.join("\n");
           pre.appendChild(code);
           container.appendChild(pre);
-
           continue;
         }
 
@@ -977,10 +886,8 @@
           const heading = document.createElement(
             "h" + headingMatch[1].length
           );
-
           appendInlineMarkdown(heading, headingMatch[2]);
           container.appendChild(heading);
-
           i++;
           continue;
         }
@@ -990,24 +897,17 @@
           const quote = document.createElement("blockquote");
           const quoteLines = [];
 
-          while (
-            i < lines.length &&
-            lines[i].trim().startsWith(">")
-          ) {
-            quoteLines.push(
-              lines[i].trim().replace(/^>\s?/, "")
-            );
-
+          while (i < lines.length && lines[i].trim().startsWith(">")) {
+            quoteLines.push(lines[i].trim().replace(/^>\s?/, ""));
             i++;
           }
 
           appendInlineMarkdown(quote, quoteLines.join(" "));
           container.appendChild(quote);
-
           continue;
         }
 
-        // Bullet lists and numbered lists
+        // Lists
         const isBullet = /^[-*+]\s+/.test(trimmed);
         const isNumbered = /^\d+[.)]\s+/.test(trimmed);
 
@@ -1016,7 +916,6 @@
 
           while (i < lines.length) {
             const current = lines[i].trim();
-
             const bulletMatch = current.match(/^[-*+]\s+(.+)$/);
             const numberMatch = current.match(/^\d+[.)]\s+(.+)$/);
 
@@ -1024,15 +923,11 @@
               ? (bulletMatch && bulletMatch[1])
               : (numberMatch && numberMatch[1]);
 
-            if (!itemText) {
-              break;
-            }
+            if (!itemText) break;
 
             const item = document.createElement("li");
-
             appendInlineMarkdown(item, itemText);
             list.appendChild(item);
-
             i++;
           }
 
@@ -1040,7 +935,7 @@
           continue;
         }
 
-        // Normal paragraphs. Join wrapped lines until a new block starts.
+        // Paragraphs
         const paragraphLines = [];
 
         while (i < lines.length && lines[i].trim()) {
@@ -1067,13 +962,11 @@
         }
 
         const paragraph = document.createElement("p");
-
         appendInlineMarkdown(paragraph, paragraphLines.join(" "));
         container.appendChild(paragraph);
       }
     }
 
-    // Add messages and format AI replies safely.
     function addMessage(sender, message, type) {
       const bubble = document.createElement("div");
       bubble.className = "message " + type;
@@ -1094,17 +987,15 @@
       bubble.appendChild(label);
       bubble.appendChild(content);
       chat.appendChild(bubble);
-
       chat.scrollTop = chat.scrollHeight;
     }
 
-    // Show the conversation and hide the welcome screen.
     function openChat() {
       welcome.hidden = true;
       chat.hidden = false;
     }
 
-    // Welcome cards insert a suggested prompt into the composer.
+    // Suggested prompts
     document.querySelectorAll("[data-prompt]").forEach(function(card) {
       card.addEventListener("click", function() {
         input.value = card.dataset.prompt;
@@ -1112,7 +1003,7 @@
       });
     });
 
-    // Support Creator panel.
+    // Support Creator modal
     function openSupport() {
       supportModal.classList.add("open");
       closeSupport.focus();
@@ -1126,11 +1017,8 @@
     supportButton.addEventListener("click", openSupport);
     closeSupport.addEventListener("click", hideSupport);
 
-    // Close the panel by clicking outside it or pressing Escape.
     supportModal.addEventListener("click", function(event) {
-      if (event.target === supportModal) {
-        hideSupport();
-      }
+      if (event.target === supportModal) hideSupport();
     });
 
     document.addEventListener("keydown", function(event) {
@@ -1142,7 +1030,7 @@
       }
     });
 
-    // Copy the creator's M-Pesa number.
+    // Copy M-Pesa number
     const copyMpesaButton = document.getElementById("copyMpesa");
     const copyStatus = document.getElementById("copyStatus");
     const paymentNumber = document.getElementById("paymentNumber");
@@ -1159,14 +1047,12 @@
       }
     });
 
-    // Check the existing Worker health endpoint.
+    // Check Worker health endpoint
     async function checkConnection() {
       try {
         const response = await fetch(WORKER_URL);
 
-        if (!response.ok) {
-          throw new Error("Connection failed");
-        }
+        if (!response.ok) throw new Error("Connection failed");
 
         const data = await response.json();
 
@@ -1181,15 +1067,13 @@
       }
     }
 
-    // Existing chat API request format preserved.
+    // Existing chat API request format preserved
     form.addEventListener("submit", async function(event) {
       event.preventDefault();
 
       const message = input.value.trim();
 
-      if (!message || button.disabled) {
-        return;
-      }
+      if (!message || button.disabled) return;
 
       openChat();
       addMessage("You", message, "user");
@@ -1211,9 +1095,7 @@
         const data = await response.json();
 
         if (!response.ok) {
-          throw new Error(
-            data.error || "The server returned an error."
-          );
+          throw new Error(data.error || "The server returned an error.");
         }
 
         addMessage(
@@ -1237,7 +1119,6 @@
       }
     });
 
-    // Check backend availability when the page loads.
     checkConnection();
   </script>
 </body>
